@@ -1,0 +1,5 @@
+
+> @a1/foundry-web@0.1.0 lint /app/apps/foundry-web
+> next lint
+
+✔ No ESLint warnings or errors

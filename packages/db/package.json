@@ -5,7 +5,7 @@
   "scripts": {
     "generate": "prisma generate",
     "build": "pnpm run generate",
-    "lint": "eslint src/**/*.ts"
+    "lint": "eslint --no-error-on-unmatched-pattern src/**/*.ts"
   },
   "dependencies": {
     "@prisma/client": "^5.10.2"

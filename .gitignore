@@ -1,2 +1,6 @@
 node_modules
 demo-output
+.next
+dist
+.turbo
+*.log

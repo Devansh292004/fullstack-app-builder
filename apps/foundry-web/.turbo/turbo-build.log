@@ -1,0 +1,8 @@
+
+> @a1/foundry-web@0.1.0 build /app/apps/foundry-web
+> next build
+
+  ▲ Next.js 14.2.0
+
+   Creating an optimized production build ...
+ ELIFECYCLE  Command failed.

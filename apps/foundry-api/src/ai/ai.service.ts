@@ -1,5 +1,4 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { PITCH_TO_SPEC_PROMPT } from './prompts';
 
 @Injectable()
 export class AiService {
