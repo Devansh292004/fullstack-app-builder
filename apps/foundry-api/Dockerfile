@@ -3,6 +3,7 @@ ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 ENV CI=true
 RUN corepack enable
+RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
 
 FROM base AS build
 COPY . /app
