@@ -1,3 +1,0 @@
-
-> @a1/db@0.1.0 lint /app/packages/db
-> eslint --no-error-on-unmatched-pattern src/**/*.ts

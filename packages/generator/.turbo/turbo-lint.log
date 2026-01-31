@@ -1,3 +1,0 @@
-
-> @a1/generator@0.1.0 lint /app/packages/generator
-> eslint --no-error-on-unmatched-pattern src/**/*.ts

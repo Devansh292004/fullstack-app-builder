@@ -1,3 +1,0 @@
-
-> @a1/generator@0.1.0 build /app/packages/generator
-> tsc && cp -r src/templates dist/

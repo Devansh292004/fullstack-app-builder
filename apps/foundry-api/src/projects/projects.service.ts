@@ -52,7 +52,8 @@ export class ProjectsService {
 
       // Step 2: Push to GitHub
       this.logger.log(`Exporting to GitHub...`);
-      await this.githubService.pushToNewRepo(outDir, project.slug, 'fake-token');
+      const githubToken = process.env.GITHUB_TOKEN || 'simulated-token';
+      await this.githubService.pushToNewRepo(outDir, project.slug, githubToken);
 
       // Step 3: Deploy to AWS
       this.logger.log(`Deploying to AWS...`);

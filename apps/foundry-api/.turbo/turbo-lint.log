@@ -1,3 +1,0 @@
-
-> @a1/foundry-api@0.1.0 lint /app/apps/foundry-api
-> eslint "{src,apps,libs,test}/**/*.ts" --fix
