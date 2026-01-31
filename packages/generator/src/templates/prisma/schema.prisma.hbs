@@ -1,0 +1,19 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+{{#each entities}}
+model {{name}} {
+  id String @id @default(cuid())
+  {{#each fields}}
+  {{name}} {{type}}{{#unless required}}?{{/unless}}
+  {{/each}}
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+{{/each}}
