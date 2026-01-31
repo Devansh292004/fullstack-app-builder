@@ -26,7 +26,8 @@ export function ProjectWizard() {
 
     // Simulate API call to NestJS backend
     try {
-      const response = await fetch('http://localhost:3001/projects', {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
+      const response = await fetch(`${apiUrl}/projects`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -44,7 +45,8 @@ export function ProjectWizard() {
         setCurrentStep(2);
         setIsGenerating(false);
       }, 2500);
-      } catch {
+    } catch (err) {
+      console.error('Failed to generate blueprint', err);
       // Fallback
       setTimeout(() => {
         setSpec({ name: 'Fallback App', entities: [{name: 'User'}] });

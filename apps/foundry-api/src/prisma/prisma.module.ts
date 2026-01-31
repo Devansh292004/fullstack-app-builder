@@ -7,7 +7,7 @@ export class PrismaService extends PrismaClient implements OnModuleInit, OnModul
     try {
       await this.$connect();
     } catch (err) {
-      console.warn('Prisma failed to connect on init.');
+      console.warn('Prisma failed to connect on init. Database might not be ready.');
     }
   }
 
@@ -22,5 +22,3 @@ export class PrismaService extends PrismaClient implements OnModuleInit, OnModul
   exports: [PrismaService],
 })
 export class PrismaModule {}
-
-export * from '@prisma/client';

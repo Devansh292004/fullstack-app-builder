@@ -15,14 +15,13 @@ export class GitHubService {
       await git.add('./*');
       await git.commit('Initial commit from A1 App Foundry');
 
-      // In a real scenario, we would use GitHub API to create the repo first
-      // and then add the remote.
-      // For this implementation, we simulate the remote push logic.
       const remote = `https://x-access-token:${githubToken}@github.com/a1foundry/${repoName}.git`;
 
       this.logger.log(`Setting remote origin: ${remote}`);
       await git.addRemote('origin', remote);
-      // await git.push('origin', 'main'); // Skip actual push in sandbox
+
+      // Perform actual push
+      await git.push('origin', 'main');
 
       return { success: true, url: `https://github.com/a1foundry/${repoName}` };
     } catch (error: any) {

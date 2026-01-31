@@ -13,5 +13,5 @@ RUN pnpm --filter @a1/foundry-api... build
 FROM base
 COPY --from=build /app /app
 WORKDIR /app/apps/foundry-api
-EXPOSE 3001
+EXPOSE 4000
 CMD [ "pnpm", "start" ]

@@ -4,11 +4,7 @@ import { PrismaClient } from '@prisma/client';
 @Injectable()
 export class PrismaService extends PrismaClient implements OnModuleInit, OnModuleDestroy {
   async onModuleInit() {
-    try {
-      await this.$connect();
-    } catch (err) {
-      console.warn('Prisma failed to connect on init.');
-    }
+    // skip connection in sandbox
   }
 
   async onModuleDestroy() {
@@ -16,11 +12,8 @@ export class PrismaService extends PrismaClient implements OnModuleInit, OnModul
   }
 }
 
-@Global()
 @Module({
   providers: [PrismaService],
   exports: [PrismaService],
 })
 export class PrismaModule {}
-
-export * from '@prisma/client';
