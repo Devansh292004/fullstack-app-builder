@@ -1,0 +1,10 @@
+node_modules
+.next
+dist
+.turbo
+*.log
+generated
+api.log
+web.log
+build_output.txt
+lint_output.txt
