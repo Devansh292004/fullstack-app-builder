@@ -16,9 +16,8 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "paths": {
-      "@a1/db": ["packages/db"],
-      "@a1/generator": ["packages/generator/src"],
-      "@a1/shared": ["packages/shared/src"]
+      "@a1/db": ["packages/db/src"],
+      "@a1/generator": ["packages/generator/src"]
     }
   },
   "exclude": ["node_modules", "dist", ".next"]
