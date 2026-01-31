@@ -1,7 +1,5 @@
 const fs = require('fs-extra');
 const path = require('path');
-// Since we can't easily import TS in Node here without setup,
-// I'll replicate the Emitter logic in JS for this demo to prove it works with the TEMPLATES.
 const Handlebars = require('handlebars');
 
 async function emitDir(src, dest, context) {
@@ -23,6 +21,30 @@ async function emitDir(src, dest, context) {
   }
 }
 
+async function emitEntity(outDir, entity) {
+  const backendSrc = path.join(outDir, 'backend/src');
+  const content = `
+import { Controller, Get, Post, Body } from '@nestjs/common';
+import { PrismaService } from './prisma.service';
+
+@Controller('${entity.name.toLowerCase()}s')
+export class ${entity.name}Controller {
+  constructor(private prisma: PrismaService) {}
+
+  @Post()
+  create(@Body() data: any) {
+    return this.prisma.${entity.name.toLowerCase()}.create({ data });
+  }
+
+  @Get()
+  findAll() {
+    return this.prisma.${entity.name.toLowerCase()}.findMany();
+  }
+}
+  `;
+  await fs.outputFile(path.join(backendSrc, `${entity.name}.controller.ts`), content.trim());
+}
+
 async function main() {
   const spec = {
     name: 'Luxury SaaS',
@@ -39,6 +61,11 @@ async function main() {
 
   await fs.ensureDir(outDir);
   await emitDir(templateDir, outDir, spec);
+
+  for (const entity of spec.entities) {
+    await emitEntity(outDir, entity);
+  }
+
   console.log('Successfully emitted Luxury SaaS to demo-output');
 }
 

@@ -15,9 +15,24 @@ export class Emitter {
     await fs.ensureDir(outDir);
 
     const templateDir = path.join(__dirname, 'templates');
+    if (!fs.existsSync(templateDir)) {
+       // Handle case where we might be running from src during dev
+       const devTemplateDir = path.join(process.cwd(), 'packages/generator/src/templates');
+       if (fs.existsSync(devTemplateDir)) {
+          await this.emitDir(devTemplateDir, outDir, spec);
+       } else {
+          throw new Error(`Template directory not found: ${templateDir}`);
+       }
+    } else {
+       await this.emitDir(templateDir, outDir, spec);
+    }
 
-    // Recursive emission helper
-    await this.emitDir(templateDir, outDir, spec);
+    // Dynamic entity generation
+    if (spec.entities) {
+      for (const entity of spec.entities) {
+        await this.emitEntity(entity);
+      }
+    }
 
     console.log(`Project ${spec.name} emitted to ${outDir}`);
   }
@@ -40,5 +55,33 @@ export class Emitter {
         await fs.outputFile(path.join(dest, targetName), result);
       }
     }
+  }
+
+  private async emitEntity(entity: any) {
+    const { outDir } = this.options;
+    const backendSrc = path.join(outDir, 'backend/src');
+    await fs.ensureDir(backendSrc);
+
+    // Generate Controller
+    const controllerTemplate = `
+import { Controller, Get, Post, Body } from '@nestjs/common';
+import { PrismaService } from './prisma.service';
+
+@Controller('${entity.name.toLowerCase()}s')
+export class ${entity.name}Controller {
+  constructor(private prisma: PrismaService) {}
+
+  @Post()
+  create(@Body() data: any) {
+    return this.prisma.${entity.name.toLowerCase()}.create({ data });
+  }
+
+  @Get()
+  findAll() {
+    return this.prisma.${entity.name.toLowerCase()}.findMany();
+  }
+}
+    `;
+    await fs.outputFile(path.join(backendSrc, `${entity.name}.controller.ts`), controllerTemplate.trim());
   }
 }

@@ -1,6 +1,21 @@
 {
-	"dependencies": {
-		"fs-extra": "^11.3.3",
-		"handlebars": "^4.7.8"
-	}
+  "name": "a1-app-foundry",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "test": "turbo run test"
+  },
+  "dependencies": {
+    "fs-extra": "^11.3.3",
+    "handlebars": "^4.7.8"
+  },
+  "devDependencies": {
+    "turbo": "^1.10.0",
+    "typescript": "^5.0.0",
+    "eslint": "^8.0.0",
+    "prettier": "^3.0.0"
+  }
 }

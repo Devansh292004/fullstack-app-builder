@@ -1,6 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
-// We mock the Emitter import since we might not have the package linked in this shell
-// import { Emitter } from '@a1/generator';
+import { Emitter } from '@a1/generator';
 import * as path from 'path';
 
 @Injectable()
@@ -16,7 +15,29 @@ export class ProjectsService {
       status: 'generating'
     };
     this.projects.push(newProject);
+
+    // Run emission in background
+    this.emitProject(newProject);
+
     return newProject;
+  }
+
+  private async emitProject(project: any) {
+    try {
+      const outDir = path.join(process.cwd(), 'generated', project.slug);
+      const emitter = new Emitter({
+        outDir,
+        spec: project
+      });
+      await emitter.emit();
+      project.status = 'ready';
+      project.outputPath = outDir;
+      this.logger.log(`Project ${project.name} generated successfully at ${outDir}`);
+    } catch (error) {
+      project.status = 'error';
+      project.error = error.message;
+      this.logger.error(`Failed to generate project ${project.name}`, error);
+    }
   }
 
   findAll() {
