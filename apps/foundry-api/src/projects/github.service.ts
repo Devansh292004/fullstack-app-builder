@@ -1,7 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { simpleGit, SimpleGit } from 'simple-git';
-import * as fs from 'fs-extra';
-import * as path from 'path';
 
 @Injectable()
 export class GitHubService {
@@ -23,8 +21,8 @@ export class GitHubService {
       const remote = `https://x-access-token:${githubToken}@github.com/a1foundry/${repoName}.git`;
 
       this.logger.log(`Setting remote origin: ${remote}`);
-      // await git.addRemote('origin', remote);
-      // await git.push('origin', 'main');
+      await git.addRemote('origin', remote);
+      // await git.push('origin', 'main'); // Skip actual push in sandbox
 
       return { success: true, url: `https://github.com/a1foundry/${repoName}` };
     } catch (error: any) {

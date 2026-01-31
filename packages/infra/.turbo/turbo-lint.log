@@ -1,3 +1,0 @@
-
-> @a1/infra@0.1.0 lint /app/packages/infra
-> eslint --no-error-on-unmatched-pattern src/**/*.ts

@@ -1,6 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { exec } from 'child_process';
 import { promisify } from 'util';
+import * as path from 'path';
 
 const execAsync = promisify(exec);
 
@@ -12,6 +13,9 @@ export class DeploymentService {
     this.logger.log(`Starting AWS deployment for project at ${projectPath} (Env: ${env})`);
 
     try {
+      // In a real environment, we would execute these.
+      // For the demo, we simulate the output of these commands to show the flow.
+
       // Step 1: Install dependencies in the generated project
       this.logger.log('Installing dependencies in generated project...');
       // await execAsync('pnpm install', { cwd: projectPath });
@@ -22,11 +26,10 @@ export class DeploymentService {
 
       // Step 3: Run CDK Deploy
       this.logger.log('Executing CDK Deployment...');
-      // const { stdout, stderr } = await execAsync('pnpm cdk deploy --all --require-approval never', {
+      // await execAsync('pnpm cdk deploy --all --require-approval never', {
       //   cwd: path.join(projectPath, 'packages/infra')
       // });
 
-      // Simulate successful deployment output
       this.logger.log('Deployment successful.');
       return {
         endpoint: `https://${env}-api.a1foundry.com`,
