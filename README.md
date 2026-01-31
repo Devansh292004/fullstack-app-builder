@@ -46,7 +46,7 @@ Start the platform in development mode:
 pnpm dev
 ```
 - **Platform Web UI**: [http://localhost:3000](http://localhost:3000)
-- **Foundry API**: [http://localhost:3001/api](http://localhost:3001/api)
+- **Foundry API**: [http://localhost:4000/api](http://localhost:4000/api) (Swagger UI at `/api`)
 
 ### 5. Building for Production
 ```bash
@@ -71,5 +71,11 @@ Every generated app follows the "A1 Luxury Standard":
 ```bash
 pnpm test
 ```
+
+## 🚢 Deployment (AWS)
+To deploy the Foundry itself or the generated apps:
+1. Ensure your AWS credentials are configured.
+2. Set `GITHUB_TOKEN` in your environment.
+3. Run `pnpm --filter @a1/infra deploy`.
 
 A1 App Foundry is designed for developers who value speed without compromising on engineering excellence.

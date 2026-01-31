@@ -1,18 +1,13 @@
-import { Injectable } from '@nestjs/common';
-import { PrismaService } from '@a1/db';
+import { Injectable, Logger } from '@nestjs/common';
+import { PrismaService } from '../prisma';
 
 @Injectable()
 export class AuditLogService {
-  constructor(private prisma: PrismaService) {}
+  private readonly logger = new Logger(AuditLogService.name);
 
-  async log(tenantId: string, action: string, metadata: any, userId?: string): Promise<any> {
-    return this.prisma.auditLog.create({
-      data: {
-        tenantId,
-        action,
-        metadata,
-        userId
-      }
-    });
+  constructor() {}
+
+  async log(action: string, details: any) {
+    this.logger.log(`Audit: ${action} - ${JSON.stringify(details)}`);
   }
 }
