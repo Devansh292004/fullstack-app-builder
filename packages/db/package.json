@@ -2,17 +2,20 @@
   "name": "@a1/db",
   "version": "0.1.0",
   "private": true,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "generate": "prisma generate",
-    "build": "pnpm run generate",
+    "build": "pnpm run generate && tsc",
     "lint": "eslint --no-error-on-unmatched-pattern src/**/*.ts"
   },
   "dependencies": {
+    "@nestjs/common": "^10.4.22",
     "@prisma/client": "^5.10.2"
   },
   "devDependencies": {
+    "eslint": "^8.57.0",
     "prisma": "^5.10.2",
-    "typescript": "^5.3.3",
-    "eslint": "^8.57.0"
+    "typescript": "^5.3.3"
   }
 }

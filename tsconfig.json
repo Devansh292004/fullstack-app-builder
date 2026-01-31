@@ -14,7 +14,12 @@
     "skipLibCheck": true,
     "strict": true,
     "esModuleInterop": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "paths": {
+      "@a1/db": ["packages/db"],
+      "@a1/generator": ["packages/generator/src"],
+      "@a1/shared": ["packages/shared/src"]
+    }
   },
   "exclude": ["node_modules", "dist", ".next"]
 }

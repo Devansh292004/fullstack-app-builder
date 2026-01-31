@@ -7,12 +7,6 @@
    Creating an optimized production build ...
  ✓ Compiled successfully
    Linting and checking validity of types ...
-
-   We detected TypeScript in your project and reconfigured your tsconfig.json file for you. Strict-mode is set to false by default.
-   The following mandatory changes were made to your tsconfig.json:
-
-	- isolatedModules was set to true (requirement for SWC / Babel)
-
    Collecting page data ...
    Generating static pages (0/4) ...
    Generating static pages (1/4)
@@ -23,11 +17,11 @@
    Collecting build traces ...
 
 Route (app)                              Size     First Load JS
-┌ ○ /                                    1.85 kB        88.7 kB
+┌ ○ /                                    2.56 kB        89.4 kB
 └ ○ /_not-found                          871 B          87.7 kB
 + First Load JS shared by all            86.8 kB
   ├ chunks/71ec73ba-31eedb7be825c314.js  53.6 kB
-  ├ chunks/963-81165df9f8e67b56.js       31.3 kB
+  ├ chunks/963-9a24109e16d196a8.js       31.3 kB
   └ other shared chunks (total)          1.86 kB
 
 

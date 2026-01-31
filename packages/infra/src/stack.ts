@@ -2,6 +2,7 @@ import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import { NetworkConstruct } from './constructs/network';
 import { StorageConstruct } from './constructs/storage';
+import { ComputeConstruct } from './constructs/compute';
 
 export class A1FoundryStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -9,5 +10,6 @@ export class A1FoundryStack extends cdk.Stack {
 
     const network = new NetworkConstruct(this, 'Network');
     new StorageConstruct(this, 'Storage', { vpc: network.vpc });
+    new ComputeConstruct(this, 'Compute', { vpc: network.vpc });
   }
 }

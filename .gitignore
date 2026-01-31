@@ -4,3 +4,9 @@ demo-output
 dist
 .turbo
 *.log
+api.log
+web.log
+build_output.txt
+lint_output.txt
+apps/foundry-api/generated/*
+!apps/foundry-api/generated/.gitkeep
