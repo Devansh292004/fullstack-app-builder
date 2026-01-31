@@ -1,0 +1,91 @@
+
+> a1-app-foundry@1.0.0 build /app
+> turbo run build
+
+• Packages in scope: @a1/db, @a1/foundry-api, @a1/foundry-web, @a1/generator, @a1/infra
+• Running build in 5 packages
+• Remote caching disabled
+@a1/db:build: cache miss, executing 18a79a1d1c4a80ff
+@a1/infra:build: cache miss, executing dcb943a65ef11d30
+@a1/foundry-web:build: cache miss, executing 1ca1f6ed2cc526aa
+@a1/generator:build: cache miss, executing b971763cb4d52f35
+@a1/foundry-web:build:
+@a1/foundry-web:build: > @a1/foundry-web@0.1.0 build /app/apps/foundry-web
+@a1/foundry-web:build: > next build
+@a1/foundry-web:build:
+@a1/generator:build:
+@a1/generator:build: > @a1/generator@0.1.0 build /app/packages/generator
+@a1/generator:build: > tsc && cp -r src/templates dist/
+@a1/generator:build:
+@a1/db:build:
+@a1/db:build: > @a1/db@0.1.0 build /app/packages/db
+@a1/db:build: > pnpm run generate
+@a1/db:build:
+@a1/infra:build:
+@a1/infra:build: > @a1/infra@0.1.0 build /app/packages/infra
+@a1/infra:build: > tsc
+@a1/infra:build:
+@a1/db:build:
+@a1/db:build: > @a1/db@0.1.0 generate /app/packages/db
+@a1/db:build: > prisma generate
+@a1/db:build:
+@a1/foundry-web:build:   ▲ Next.js 14.2.0
+@a1/foundry-web:build:
+@a1/foundry-web:build:    Creating an optimized production build ...
+@a1/db:build: Prisma schema loaded from prisma/schema.prisma
+@a1/db:build:
+@a1/db:build: ✔ Generated Prisma Client (v5.22.0) to ./../../node_modules/.pnpm/@prisma+client@5.22.0_prisma@5.22.0/node_modules/@prisma/client in 173ms
+@a1/db:build:
+@a1/db:build: Start by importing your Prisma Client (See: https://pris.ly/d/importing-client)
+@a1/db:build:
+@a1/db:build: Tip: Want to react to database changes in your app as they happen? Discover how with Pulse: https://pris.ly/tip-1-pulse
+@a1/db:build:
+@a1/foundry-api:build: cache miss, executing 297e6225c66a78f7
+@a1/foundry-api:build:
+@a1/foundry-api:build: > @a1/foundry-api@0.1.0 build /app/apps/foundry-api
+@a1/foundry-api:build: > nest build
+@a1/foundry-api:build:
+@a1/foundry-api:build: Found 7 error(s).
+@a1/foundry-api:build:
+@a1/foundry-api:build: [96msrc/projects/dto/create-project.dto.ts[0m:[93m5[0m:[93m3[0m - [91merror[0m[90m TS2564: [0mProperty 'name' has no initializer and is not definitely assigned in the constructor.
+@a1/foundry-api:build:
+@a1/foundry-api:build: [7m5[0m   name: string;
+@a1/foundry-api:build: [7m [0m [91m  ~~~~[0m
+@a1/foundry-api:build: [96msrc/projects/dto/create-project.dto.ts[0m:[93m8[0m:[93m3[0m - [91merror[0m[90m TS2564: [0mProperty 'slug' has no initializer and is not definitely assigned in the constructor.
+@a1/foundry-api:build:
+@a1/foundry-api:build: [7m8[0m   slug: string;
+@a1/foundry-api:build: [7m [0m [91m  ~~~~[0m
+@a1/foundry-api:build: [96msrc/projects/dto/create-project.dto.ts[0m:[93m11[0m:[93m3[0m - [91merror[0m[90m TS2564: [0mProperty 'description' has no initializer and is not definitely assigned in the constructor.
+@a1/foundry-api:build:
+@a1/foundry-api:build: [7m11[0m   description: string;
+@a1/foundry-api:build: [7m  [0m [91m  ~~~~~~~~~~~[0m
+@a1/foundry-api:build: [96msrc/projects/dto/create-project.dto.ts[0m:[93m14[0m:[93m3[0m - [91merror[0m[90m TS2564: [0mProperty 'entities' has no initializer and is not definitely assigned in the constructor.
+@a1/foundry-api:build:
+@a1/foundry-api:build: [7m14[0m   entities: any[];
+@a1/foundry-api:build: [7m  [0m [91m  ~~~~~~~~[0m
+@a1/foundry-api:build: [96msrc/projects/projects.service.ts[0m:[93m2[0m:[93m25[0m - [91merror[0m[90m TS2307: [0mCannot find module '@a1/generator' or its corresponding type declarations.
+@a1/foundry-api:build:
+@a1/foundry-api:build: [7m2[0m import { Emitter } from '@a1/generator';
+@a1/foundry-api:build: [7m [0m [91m                        ~~~~~~~~~~~~~~~[0m
+@a1/foundry-api:build: [96msrc/projects/projects.service.ts[0m:[93m17[0m:[93m24[0m - [91merror[0m[90m TS2345: [0mArgument of type 'any' is not assignable to parameter of type 'never'.
+@a1/foundry-api:build:
+@a1/foundry-api:build: [7m17[0m     this.projects.push(newProject);
+@a1/foundry-api:build: [7m  [0m [91m                       ~~~~~~~~~~[0m
+@a1/foundry-api:build: [96msrc/projects/projects.service.ts[0m:[93m38[0m:[93m23[0m - [91merror[0m[90m TS18046: [0m'error' is of type 'unknown'.
+@a1/foundry-api:build:
+@a1/foundry-api:build: [7m38[0m       project.error = error.message;
+@a1/foundry-api:build: [7m  [0m [91m                      ~~~~~[0m
+@a1/foundry-api:build:
+@a1/foundry-api:build:  ELIFECYCLE  Command failed with exit code 1.
+@a1/foundry-api:build: ERROR: command finished with error: command (/app/apps/foundry-api) /home/jules/.nvm/versions/node/v22.22.0/bin/pnpm run build exited (1)
+@a1/foundry-web:build:  ELIFECYCLE  Command failed.
+@a1/infra:build:  ELIFECYCLE  Command failed.
+@a1/foundry-api#build: command (/app/apps/foundry-api) /home/jules/.nvm/versions/node/v22.22.0/bin/pnpm run build exited (1)
+
+ Tasks:    2 successful, 5 total
+Cached:    0 cached, 5 total
+  Time:    7.537s
+Failed:    @a1/foundry-api#build
+
+ ERROR  run failed: command  exited (1)
+ ELIFECYCLE  Command failed with exit code 1.

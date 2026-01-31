@@ -1,1 +1,0 @@
-{"version":3,"file":"main.js","sourceRoot":"","sources":["../../../../packages/infra/src/main.ts"],"names":[],"mappings":";;;AACA,uCAAqC;AACrC,mCAAmC;AACnC,mCAAyC;AAEzC,MAAM,GAAG,GAAG,IAAI,GAAG,CAAC,GAAG,EAAE,CAAC;AAC1B,IAAI,sBAAc,CAAC,GAAG,EAAE,gBAAgB,EAAE;IACxC,GAAG,EAAE;QACH,OAAO,EAAE,OAAO,CAAC,GAAG,CAAC,mBAAmB;QACxC,MAAM,EAAE,OAAO,CAAC,GAAG,CAAC,kBAAkB;KACvC;CACF,CAAC,CAAC"}

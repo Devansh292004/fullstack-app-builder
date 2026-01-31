@@ -5,7 +5,7 @@ import * as path from 'path';
 @Injectable()
 export class ProjectsService {
   private readonly logger = new Logger(ProjectsService.name);
-  private projects = [];
+  private projects: any[] = [];
 
   async create(project: any) {
     const newProject = {
@@ -33,7 +33,7 @@ export class ProjectsService {
       project.status = 'ready';
       project.outputPath = outDir;
       this.logger.log(`Project ${project.name} generated successfully at ${outDir}`);
-    } catch (error) {
+    } catch (error: any) {
       project.status = 'error';
       project.error = error.message;
       this.logger.error(`Failed to generate project ${project.name}`, error);
