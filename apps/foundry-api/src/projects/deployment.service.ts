@@ -1,10 +1,4 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { exec } from 'child_process';
-import { promisify } from 'util';
-import * as path from 'path';
-
-const execAsync = promisify(exec);
-
 @Injectable()
 export class DeploymentService {
   private readonly logger = new Logger(DeploymentService.name);
