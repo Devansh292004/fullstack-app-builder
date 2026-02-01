@@ -5,7 +5,7 @@ export class CreateProjectDto {
   @ApiProperty({ description: 'The name of the project' })
   @IsString()
   @IsNotEmpty()
-  name: string;
+  name!: string;
 
   @ApiProperty({ description: 'The unique slug for the project' })
   @IsString()
@@ -13,7 +13,7 @@ export class CreateProjectDto {
   @Matches(/^[a-z0-9-]+$/, {
     message: 'Invalid project slug. Use only lowercase, numbers, and hyphens.',
   })
-  slug: string;
+  slug!: string;
 
   @ApiProperty({ description: 'A short description of the project' })
   @IsString()
