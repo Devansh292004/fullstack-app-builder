@@ -2,22 +2,54 @@ import * as cdk from 'aws-cdk-lib';
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import * as ecs from 'aws-cdk-lib/aws-ecs';
 import * as ecs_patterns from 'aws-cdk-lib/aws-ecs-patterns';
+import * as rds from 'aws-cdk-lib/aws-rds';
+import * as s3 from 'aws-cdk-lib/aws-s3';
 import { Construct } from 'constructs';
 
-export class {{name}}Stack extends cdk.Stack {
+export class AppStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    const vpc = new ec2.Vpc(this, 'Vpc', { maxAzs: 2 });
-    const cluster = new ecs.Cluster(this, 'Cluster', { vpc });
+    // 1. VPC & Networking (The Foundation)
+    const vpc = new ec2.Vpc(this, 'A1Vpc', { maxAzs: 2 });
 
-    new ecs_patterns.ApplicationLoadBalancedFargateService(this, 'Service', {
+    // 2. Database (The Memory)
+    const db = new rds.DatabaseInstance(this, 'A1Postgres', {
+      engine: rds.DatabaseInstanceEngine.postgres({ version: rds.PostgresEngineVersion.VER_15 }),
+      vpc,
+      instanceType: ec2.InstanceType.of(ec2.InstanceClass.BURSTABLE3, ec2.InstanceSize.MICRO),
+      allocatedStorage: 20,
+      databaseName: 'foundry_app',
+    });
+
+    // 3. Storage (The Archives)
+    const bucket = new s3.Bucket(this, 'A1Assets', {
+      removalPolicy: cdk.RemovalPolicy.DESTROY,
+      autoDeleteObjects: true,
+      encryption: s3.BucketEncryption.S3_MANAGED,
+    });
+
+    // 4. Compute (The Muscle)
+    const cluster = new ecs.Cluster(this, 'A1Cluster', { vpc });
+
+    const loadBalancedFargateService = new ecs_patterns.ApplicationLoadBalancedFargateService(this, 'A1Service', {
       cluster,
-      memoryLimitMiB: 1024,
-      cpu: 512,
+      cpu: 256,
+      memoryLimitMiB: 512,
+      desiredCount: 1,
       taskImageOptions: {
-        image: ecs.ContainerImage.fromRegistry('amazon/amazon-ecs-sample'),
+        image: ecs.ContainerImage.fromRegistry('node:20-slim'), // Placeholder
+        environment: {
+          DATABASE_URL: `postgresql://postgres@${db.instanceEndpoint.hostname}:5432/foundry_app`,
+          S3_BUCKET: bucket.bucketName,
+        },
       },
+      publicLoadBalancer: true,
+    });
+
+    // Output values
+    new cdk.CfnOutput(this, 'LoadBalancerDNS', {
+      value: loadBalancedFargateService.loadBalancer.loadBalancerDnsName,
     });
   }
 }
