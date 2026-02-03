@@ -1,0 +1,58 @@
+openapi: 3.0.0
+info:
+  title: A1 App Foundry API
+  version: 1.0.0
+  description: Luxury-grade meta-app generation and orchestration API.
+paths:
+  /projects:
+    post:
+      summary: Create a new project and initiate generation.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name: { type: string }
+                slug: { type: string }
+                pitch: { type: string }
+                spec: { type: object }
+      responses:
+        '201':
+          description: Project created.
+    get:
+      summary: List all projects.
+      responses:
+        '200':
+          description: List of projects.
+  /projects/{slug}:
+    get:
+      summary: Get project details.
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Project details.
+  /ai/generate:
+    post:
+      summary: Generate a technical specification from a pitch.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pitch: { type: string }
+      responses:
+        '200':
+          description: Generated spec.
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
